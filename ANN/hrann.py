@@ -51,7 +51,7 @@ classifier.add(Dense(units = 1,activation='sigmoid',kernel_initializer='uniform'
 #learning rate 0.001
 classifier.compile(optimizer='rmsprop',loss='binary_crossentropy',metrics=['accuracy'])
 
-classifier.fit(X_train,y_train,batch_size=32,epochs=75)
+history = classifier.fit(X_train,y_train,batch_size=32,epochs=75)
 
 y_pred = classifier.predict(X_test)
 y_pred = y_pred >0.5
@@ -59,6 +59,27 @@ y_pred = y_pred >0.5
 from sklearn.metrics import confusion_matrix
 cm = confusion_matrix(y_test,y_pred)
 
+## visualizing the error
+plt.figure(figsize=(11,8)) 
+import matplotlib.pyplot as plt
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('model accuracy')
+plt.ylabel('error')
+plt.xlabel('epochs')
+plt.legend(['train','test'])
+plt.show()
+
+#visualizing the accuracy
+plt.figure(figsize=(11,8)) 
+import matplotlib.pyplot as plt
+plt.plot(history.history['acc'])
+plt.plot(history.history['val_acc'])
+plt.title('model accuracy')
+plt.ylabel('accuracy')
+plt.xlabel('epochs')
+plt.legend(['train','test'])
+plt.show()
 
 #evaluating the model
 from keras.wrappers.scikit_learn import KerasClassifier
