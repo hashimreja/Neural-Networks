@@ -42,17 +42,16 @@ from keras.layers import Dense
 from keras.layers import Dropout
 
 classifier = Sequential()
-classifier.add(Dense(units = 6,activation='relu',kernel_initializer='uniform',input_dim=11))
+classifier.add(Dense(units = 32,activation='relu',kernel_initializer='uniform',input_dim=11))
 classifier.add(Dropout(0.0))
-classifier.add(Dense(units = 6,activation='relu',kernel_initializer='uniform'))
-classifier.add(Dropout(0.0))
-classifier.add(Dense(units = 2,activation='relu',kernel_initializer='uniform'))
-classifier.add(Dropout(0.0))
+classifier.add(Dense(units = 32,activation='relu',kernel_initializer='uniform'))
+classifier.add(Dropout(0.4))
 classifier.add(Dense(units = 1,activation='sigmoid',kernel_initializer='uniform'))
 #compiling the network 
+#learning rate 0.001
 classifier.compile(optimizer='rmsprop',loss='binary_crossentropy',metrics=['accuracy'])
 
-classifier.fit(X_train,y_train,batch_size=31,epochs=300)
+classifier.fit(X_train,y_train,batch_size=32,epochs=75)
 
 y_pred = classifier.predict(X_test)
 y_pred = y_pred >0.5
@@ -69,14 +68,14 @@ from keras.layers import Dense
 from keras.layers import Dropout
 def building_classifier():
     classifier = Sequential()
-    classifier.add(Dense(units = 6,activation='relu',kernel_initializer='uniform',input_dim=11))
+    classifier.add(Dense(units = 32,activation='relu',kernel_initializer='uniform',input_dim=11))
     classifier.add(Dropout(0.0))
-    classifier.add(Dense(units = 6,activation='relu',kernel_initializer='uniform'))
-    classifier.add(Dropout(0.0))
-    classifier.add(Dense(units = 1,activation='sigmoid',kernel_initializer='uniform')) 
+    classifier.add(Dense(units = 32,activation='relu',kernel_initializer='uniform'))
+    classifier.add(Dropout(0.4))
+    classifier.add(Dense(units = 1,activation='sigmoid',kernel_initializer='uniform'))
     classifier.compile(optimizer='rmsprop',loss='binary_crossentropy',metrics=['accuracy'])
     return classifier
-classifier = KerasClassifier(build_fn = building_classifier,epochs = 300,batch_size=30)
+classifier = KerasClassifier(build_fn = building_classifier,epochs = 75,batch_size=32)
 accuracies = cross_val_score(estimator = classifier,X = X_train,y = y_train,cv = 10)
 
 accuracies.mean()
@@ -90,17 +89,15 @@ from keras.layers import Dense
 from keras.layers import Dropout
 def building_classifier(optimizer):
     classifier = Sequential()
-    classifier.add(Dense(units = 6,activation='relu',kernel_initializer='uniform',input_dim=11))
-    classifier.add(Dropout(0.1))
-    classifier.add(Dense(units = 6,activation='relu',kernel_initializer='uniform'))
-    classifier.add(Dropout(0.1))
-    classifier.add(Dense(units = 6,activation='relu',kernel_initializer='uniform'))
-    classifier.add(Dropout(0.1))
+    classifier.add(Dense(units = 32,activation='relu',kernel_initializer='uniform',input_dim=11))
+    classifier.add(Dropout(0.0))
+    classifier.add(Dense(units = 32,activation='relu',kernel_initializer='uniform'))
+    classifier.add(Dropout(0.4))
     classifier.add(Dense(units = 1,activation='sigmoid',kernel_initializer='uniform')) 
     classifier.compile(optimizer=optimizer,loss='binary_crossentropy',metrics=['accuracy'])
     return classifier
 classifier = KerasClassifier(build_fn = building_classifier)
-parameters = {'epochs':[300,500],'batch_size':[25,32],'optimizer':['adam','rmsprop']}
+parameters = {'epochs':[70,300],'batch_size':[25,32],'optimizer':['adam','rmsprop']}
 grid_search = GridSearchCV(estimator = classifier,
                            param_grid = parameters,
                            scoring = 'accuracy',
