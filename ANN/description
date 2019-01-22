@@ -1,5 +1,3 @@
 problem description - determining wether a person will continue to stay or leave the bank by considering his/her details like
 creditcard score,age,salary etc...
-base accuarcy 83.0 after tuning the hyperparameters of the model 85.6  with 75 epochs and a batch size of 32
-if anyone reading this hope you will get better accuaracy than me...
-iam fine tuning this algorithm which is a time consuming process soon i will update my new accuracy.
+base accuarcy 83.0 after tuning the hyperparameters of the model 86.4  with 200 epochs and a batch size of 15
