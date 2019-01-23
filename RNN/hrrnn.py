@@ -84,12 +84,12 @@ plt.xlabel('date')
 plt.ylabel('open rate')
 plt.legend()
 plt.show()
-
-#saving the model 
-
-regressor.save('kirillmodel')
-regressor.save_weights('weights.h5')
+#architecture of model
 regressor.summary()
+#saving the model 
+regressor.save('hashimsmodel')
+regressor.save_weights('weights.h5')
+
 
 
 
