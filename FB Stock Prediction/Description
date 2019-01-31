@@ -1,0 +1,4 @@
+predicting the stocks of facebook 
+the data i used here is taken from the stockmarket data of fb
+i trained the model with the loss 0.0010 and taken 60 time steps back for predicting the outcomes
+Happy MachineLearning!!
