@@ -46,6 +46,7 @@ regressor.add(Dense(units = 1))
 #compiling the network
 regressor.compile(optimizer = 'adam',loss = 'mean_squared_error')
 regressor.fit(X_train,y_train,batch_size = 32,epochs = 100)
+#completed training our model with an mse of 0.0010
 #prediction set
 X_test1 = []
 for i in range(1645,1665):
@@ -71,6 +72,3 @@ plt.plot(range(0,len(valset)),valset)
 regressor.save('fbmodel')
 regressor.save_weights('fbweight.h5')
 regressor.summary()
-
-
-
